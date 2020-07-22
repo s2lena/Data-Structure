@@ -1,0 +1,23 @@
+﻿  Examinee.cpp
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,10): error C3646: 'Examinee': unknown override specifier
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,22): error C3646: 'ReadExaminee': unknown override specifier
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,22): error C2059: syntax error: '('
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,30): error C2146: syntax error: missing ')' before identifier 'lineInfo'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,38): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,30): error C2146: syntax error: missing ';' before identifier 'lineInfo'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,38): error C2059: syntax error: ')'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.cpp(5,30): error C2872: 'string': ambiguous symbol
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,23): message : could be 'int string'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\VC\Tools\MSVC\14.25.28610\include\xstring(4471,7): message : or       'std::string'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.cpp(5,30): error C2146: syntax error: missing ')' before identifier 'lineInfo'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.cpp(6,1): error C2143: syntax error: missing ';' before '{'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
+  main.cpp
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,10): error C3646: 'Examinee': unknown override specifier
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,22): error C3646: 'ReadExaminee': unknown override specifier
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,22): error C2059: syntax error: '('
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,30): error C2146: syntax error: missing ')' before identifier 'lineInfo'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,38): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,30): error C2146: syntax error: missing ';' before identifier 'lineInfo'
+C:\Users\Chopper\source\repos\FileHandling\FileHandling\Examinee.h(24,38): error C2059: syntax error: ')'
+  Generating Code...
