@@ -59,15 +59,19 @@ void GenerateData(int a[], int n, int dataType)
 	switch (dataType)
 	{
 	case 0:	// ngẫu nhiên
+		cout << "Generate Random Data" << endl;
 		GenerateRandomData(a, n);
 		break;
 	case 1:	// có thứ tự
+		cout << "Generate Sorted Data" << endl;
 		GenerateSortedData(a, n);
 		break;
 	case 2:	// có thứ tự ngược
+		cout << "Generate Reverse Data" << endl;
 		GenerateReverseData(a, n);
 		break;
 	case 3:	// gần như có thứ tự
+		cout << "Generate Nearly Sorted Data" << endl;
 		GenerateNearlySortedData(a, n);
 		break;
 	default:

@@ -1,6 +1,6 @@
 ﻿#include "Algorithm.h"
 
-void SelectionSort(int a[], int n)
+void SelectionSort(int* a, int n)
 {
 	int i, j, minIdx;
 
@@ -15,7 +15,7 @@ void SelectionSort(int a[], int n)
 	}
 }
 
-void InsertionSort(int a[], int n)
+void InsertionSort(int* a, int n)
 {
 	int i, key, j;
 	for (i = 1; i < n; i++)
@@ -32,7 +32,7 @@ void InsertionSort(int a[], int n)
 	}
 }
 
-int BinarySearch(int a[], int item, int left, int right)
+int BinarySearch(int* a, int item, int left, int right)
 {
 	if (right <= left)
 		return (item > a[left]) ? (left + 1) : left;
@@ -47,7 +47,7 @@ int BinarySearch(int a[], int item, int left, int right)
 	return BinarySearch(a, item, left, mid - 1);
 }
 
-void BinaryInsertionSort(int a[], int n)
+void BinaryInsertionSort(int* a, int n)
 {
 	int i, loc, j, k, selected;
 
@@ -67,16 +67,17 @@ void BinaryInsertionSort(int a[], int n)
 	}
 }
 
-void BubbleSort(int a[], int n)
+void BubbleSort(int* a, int n)
 {
 	int i, j;
-	for (i = 2; i <= n; i++)
-		for (j = n; j >= i; j--)
-			if (a[j] < a[j - 1])
-				swap(a[j], a[j - 1]);
+	for (i = 0; i < n - 1; i++)
+
+		for (j = 0; j < n - i - 1; j++)
+			if (a[j] > a[j + 1])
+				Swap(a[j], a[j + 1]);
 }
 
-void ShakerSort(int a[], int n) 
+void ShakerSort(int* a, int n)
 {
 	int i, j, k;
 	for (i = 0; i < n;) {
@@ -93,7 +94,7 @@ void ShakerSort(int a[], int n)
 	}
 }
 
-int ShellSort(int a[], int n)
+int ShellSort(int* a, int n)
 {
 	for (int gap = n / 2; gap > 0; gap /= 2) {
 		for (int i = gap; i < n; i += 1) {
@@ -107,52 +108,52 @@ int ShellSort(int a[], int n)
 	return 0;
 }
 
-void Heapify(int arr[], int n, int i)
+void Heapify(int* a, int n, int i)
 {
-	int largest = i; 
-	int l = 2 * i + 1; 
-	int r = 2 * i + 2; 
+	int largest = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
 
-	if (l < n && arr[l] > arr[largest])
+	if (l < n && a[l] > a[largest])
 		largest = l;
 
-	if (r < n && arr[r] > arr[largest])
+	if (r < n && a[r] > a[largest])
 		largest = r;
-	
+
 	if (largest != i) {
-		Swap(arr[i], arr[largest]);
-		Heapify(arr, n, largest);
+		Swap(a[i], a[largest]);
+		Heapify(a, n, largest);
 	}
 }
 
-void HeapSort(int arr[], int n)
+void HeapSort(int* a, int n)
 {
 	for (int i = n / 2 - 1; i >= 0; i--)
-		Heapify(arr, n, i);
-	
+		Heapify(a, n, i);
+
 	for (int i = n - 1; i > 0; i--) {
-		Swap(arr[0], arr[i]);
-		Heapify(arr, i, 0);
+		Swap(a[0], a[i]);
+		Heapify(a, i, 0);
 	}
 }
 
-void Merge(int a[], int l, int m, int r)
+void Merge(int* a, int l, int m, int r)
 {
 	int i, j, k;
 	int n1 = m - l + 1;
 	int n2 = r - m;
 
-	int *L = new int[n1];
-	int *R = new int[n2];
+	int* L = new int[n1];
+	int* R = new int[n2];
 
 	for (i = 0; i < n1; i++)
 		L[i] = a[l + i];
 	for (j = 0; j < n2; j++)
 		R[j] = a[m + 1 + j];
 
-	i = 0; 
-	j = 0; 
-	k = l; 
+	i = 0;
+	j = 0;
+	k = l;
 	while (i < n1 && j < n2) {
 		if (L[i] <= R[j]) {
 			a[k] = L[i];
@@ -181,81 +182,174 @@ void Merge(int a[], int l, int m, int r)
 	delete R;
 }
 
-void MergeSort(int arr[], int l, int r)
+void MergeSort(int* a, int l, int r)
 {
 	if (l < r) {
 		int m = l + (r - l) / 2;
 
-		MergeSort(arr, l, m);
-		MergeSort(arr, m + 1, r);
+		MergeSort(a, l, m);
+		MergeSort(a, m + 1, r);
 
-		Merge(arr, l, m, r);
+		Merge(a, l, m, r);
 	}
 }
 
-void QuickSort(int a[], int l, int r) 
+int Partition(int*& a, int left, int right)
 {
-	if (r <= l)
-		return;
+	int k = rand() % (right - left) + left;
+	int pivot = a[k];
+	Swap(a[k], a[left]);
+	
+	int i = left;
 
-	int p = a[l];
-	int i = l + 1;
-	for (int j = l + 1; j <= r; j++) {
-		if (a[j] < p) {
-			Swap(a[j], a[i]);
+	for (int j = left + 1; j <= right; j++)
+	{
+
+		if (a[j] < pivot)
+		{
 			i++;
+			Swap(a[i], a[j]);
 		}
 	}
-	Swap(a[i - 1], a[l]);
-	if (i - 2 > 0)
-		QuickSort(a, l, i - 2);
-	QuickSort(a, i, r);
+	Swap(a[i], a[left]);
+	return i;
 }
 
-void CountSort(int a[], int n)
-{
-	int* output = new int[n];
+void QuickSort(int*& a, int left, int right) {
+	int s;
+	if (left < right) {
+		s = Partition(a, left, right);
+		QuickSort(a, left, s - 1);
+		QuickSort(a, s + 1, right);
+	}
+}
 
-	int count[RANGE + 1], i;
-	memset(count, 0, sizeof(count));
+void CountingSort(int* a, int n, int range) {
+	int* count = new int[range] { 0 };
+	int i;
+	int* out = new int[n] {0};
 
-	for (i = 0; a[i]; ++i)
+	for (i = 0; i < n; i++)
 		++count[a[i]];
 
-	for (i = 1; i <= RANGE; ++i)
+	for (i = 1; i < range; i++)
 		count[i] += count[i - 1];
 
-	for (i = 0; a[i]; ++i)
-	{
-		output[count[a[i]] - 1] = a[i];
+	for (i = n - 1; i >= 0; i--) {
+		out[count[a[i]] - 1] = a[i];
 		--count[a[i]];
 	}
-	
-	for (i = 0; a[i]; ++i)
-		a[i] = output[i];
-	
-	delete output;
+
+	for (i = 0; i < n; i++)
+		a[i] = out[i];
+
+	delete[] count;
+	delete[] out;
 }
 
-void RadixSort(int* a, int n, int max) 
+int GetMax(int* a, int n)
 {
-	int i, j, m, p = 1, index, temp, count = 0;
-	list<int> pocket[10];      
-	for (i = 0; i < max; i++) {
-		m = pow(10, i + 1);
-		p = pow(10, i);
-		for (j = 0; j < n; j++) {
-			temp = a[j] % m;
-			index = temp / p;      
-			pocket[index].push_back(a[j]);
+	int mx = a[0];
+	for (int i = 1; i < n; i++)
+		if (a[i] > mx)
+			mx = a[i];
+	return mx;
+}
+
+void countSort(int* a, int n, int exp)
+{
+	int* output = new int[n] {0};
+	int i, count[10] = { 0 };
+
+	for (i = 0; i < n; i++)
+		count[(a[i] / exp) % 10]++;
+	
+	for (i = 1; i < 10; i++)
+		count[i] += count[i - 1];
+
+	for (i = n - 1; i >= 0; i--)
+	{
+		output[count[(a[i] / exp) % 10] - 1] = a[i];
+		count[(a[i] / exp) % 10]--;
+	}
+
+	for (i = 0; i < n; i++)
+		a[i] = output[i];
+	delete[] output;
+}
+
+void Radixsort(int* a, int n)
+{
+	int m = GetMax(a, n);
+	for (int exp = 1; m / exp > 0; exp *= 10)
+		countSort(a, n, exp);
+}
+
+int* FlashSort(int* arr, int n) {
+	int max = 0, min = arr[0];
+
+	int m = (0.45 * n);
+	int* l = new int[m] {0};
+	int i;
+	for (i = 1; i < n; ++i) {
+		if (arr[i] < min) {
+			min = arr[i];
 		}
-		count = 0;
-		for (j = 0; j < 10; j++) {
-			while (!pocket[j].empty()) {
-				a[count] = *(pocket[j].begin());
-				pocket[j].erase(pocket[j].begin());
-				count++;
-			}
+		if (arr[i] > arr[max]) {
+			max = i;
 		}
 	}
+
+	if (min == arr[max]) {
+		return arr;
+	}
+
+	int c1 = (m - 1) / (arr[max] - min);
+
+	int k;
+	for (k = 0; k < m; k++) {
+		l[k] = 0;
+	}
+	int j;
+	for (j = 0; j < n; ++j) {
+		k = (c1 * (arr[j] - min));
+		++l[k];
+	}
+
+	for (int p = 1; p < m; ++p) {
+		l[p] = l[p] + l[p - 1];
+	}
+
+	int hold = arr[max];
+	arr[max] = arr[0];
+	arr[0] = hold;
+
+	int move = 0, t, flash;
+	j = 0;
+	k = m - 1;
+
+	while (move < (n - 1)) {
+		while (j > (l[k] - 1)) {
+			++j;
+			k = (c1 * (arr[j] - min));
+		}
+		if (k < 0) break;
+		flash = arr[j];
+		while (j != l[k]) {
+			k = (c1 * (flash - min));
+			hold = arr[t = --l[k]];
+			arr[t] = flash;
+			flash = hold;
+			++move;
+		}
+	}
+	for (j = 1; j < n; j++) {
+		hold = arr[j];
+		i = j - 1;
+		while (i >= 0 && arr[i] > hold) {
+			arr[i + 1] = arr[i--];
+		}
+		arr[i + 1] = hold;
+	}
+	return arr;
 }
